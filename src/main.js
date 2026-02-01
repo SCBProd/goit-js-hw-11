@@ -6,7 +6,7 @@ import "izitoast/dist/css/iziToast.min.css";
 let images;
 const inputEl = document.querySelector('.inpt');
 const btnSearch = document.querySelector('.inptButton');
-const formEl = document.querySelector('.searchForm');
+const formEl = document.querySelector('.form');
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
