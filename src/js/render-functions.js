@@ -7,7 +7,7 @@ const loader = document.querySelector(".loader")
 
 // Створює галерею
 const createGallery = images => {
-  const gallery = document.querySelector('.ul-gallery');
+  const gallery = document.querySelector('.gallery');
   if (!gallery) return;
 
   const markup = images
@@ -29,7 +29,7 @@ const createGallery = images => {
   gallery.innerHTML = markup;
 
   if (!lightbox) {
-    lightbox = new SimpleLightbox('.ul-gallery a', {
+    lightbox = new SimpleLightbox('.gallery a', {
       captions: true,
       captionsData: 'alt',
       captionDelay: 250,
@@ -41,7 +41,7 @@ const createGallery = images => {
 
 // Очищає галерею
 function clearGallery() {
-  const gallery = document.querySelector('.ul-gallery');
+  const gallery = document.querySelector('.gallery');
   if (!gallery) return;
   gallery.innerHTML = '';
 }
