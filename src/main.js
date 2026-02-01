@@ -1,4 +1,4 @@
-import { getImagesByQuery } from './js/pixabay-api'
+import { getImagesByQuery } from './js/pixabay-api';
 import { createGallery, clearGallery, showLoader, hideLoader } from './js/render-functions';
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
@@ -6,8 +6,9 @@ import "izitoast/dist/css/iziToast.min.css";
 let images;
 const inputEl = document.querySelector('.inpt');
 const btnSearch = document.querySelector('.inptButton');
+const formEl = document.querySelector('.searchForm');
 
-btnSearch.addEventListener('click', event => {
+formEl.addEventListener('submit', event => {
   event.preventDefault();
 
   const query = inputEl.value.trim();
@@ -33,7 +34,7 @@ btnSearch.addEventListener('click', event => {
           position: 'topRight',
           color: 'red',
           title: 'Sorry',
-          message: 'there are no images matching your search query.Please try again!',
+          message: 'there are no images matching your search query. Please try again!',
           iconUrl: 'https://img.icons8.com/?size=100&id=12405&format=png&color=000000',
         });
         return;
