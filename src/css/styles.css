@@ -102,6 +102,9 @@
 .loader.hidden {
   display: none;
 }
+.hidden {
+  display: none;
+}
 
 .loader {
   width: 100px;

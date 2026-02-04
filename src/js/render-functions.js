@@ -1,13 +1,18 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let lightbox;
-const loader = document.querySelector(".loader") 
+const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
+const loadMoreBtn = document.querySelector('.load-more');
 
+const lightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 // Створює галерею
 const createGallery = images => {
-  const gallery = document.querySelector('.gallery');
   if (!gallery) return;
 
   const markup = images
@@ -26,36 +31,45 @@ const createGallery = images => {
     `)
     .join('');
 
-  gallery.innerHTML = markup;
-
-  if (!lightbox) {
-    lightbox = new SimpleLightbox('.gallery a', {
-      captions: true,
-      captionsData: 'alt',
-      captionDelay: 250,
-    });
-  } else {
-    lightbox.refresh(); 
-  }
+  gallery.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
 };
 
 // Очищає галерею
-function clearGallery() {
-  const gallery = document.querySelector('.gallery');
+const clearGallery = () => {
   if (!gallery) return;
   gallery.innerHTML = '';
-}
+};
 
 // Показує лоадер
-function showLoader() {
+const showLoader = () => {
   if (!loader) return;
   loader.classList.remove('hidden');
-}
+};
 
 // Ховає лоадер
-function hideLoader() {
+const hideLoader = () => {
   if (!loader) return;
   loader.classList.add('hidden');
-}
+};
 
-export { createGallery, clearGallery, showLoader, hideLoader };
+// Показує кнопку Load more
+const showLoadMoreButton = () => {
+  if (!loadMoreBtn) return;
+  loadMoreBtn.classList.remove('hidden');
+};
+
+// Ховає кнопку Load more
+const hideLoadMoreButton = () => {
+  if (!loadMoreBtn) return;
+  loadMoreBtn.classList.add('hidden');
+};
+
+export {
+  createGallery,
+  clearGallery,
+  showLoader,
+  hideLoader,
+  showLoadMoreButton,
+  hideLoadMoreButton,
+};
