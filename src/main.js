@@ -79,11 +79,11 @@ formEl.addEventListener('submit', async event => {
   }
 });
 
-// Обробка кнопки Load more
+
 loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   showLoader();
-  hideLoadMoreButton(); // Приховуємо кнопку на час fetch
+  hideLoadMoreButton(); 
 
   try {
     const data = await getImagesByQuery(query, page);
@@ -101,10 +101,10 @@ loadMoreBtn.addEventListener('click', async () => {
         message: "You've reached the end of search results.",
       });
     } else {
-      showLoadMoreButton(); // Якщо ще є сторінки
+      showLoadMoreButton();
     }
 
-    // Прокрутка
+    // Прокрут
     const cardHeight = document.querySelector('.gallery').firstElementChild.getBoundingClientRect().height;
     window.scrollBy({
       top: cardHeight * 2,
