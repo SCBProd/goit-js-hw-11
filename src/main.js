@@ -55,7 +55,16 @@ formEl.addEventListener('submit', async event => {
 
     createGallery(data.hits);
 
-    if (data.totalHits > perPage) {
+    // Перевірка, чи всі результати помістились на одній сторінці
+    if (data.totalHits <= perPage) {
+      iziToast.show({
+        position: 'topRight',
+        color: 'blue',
+        title: 'Info',
+        message: "You've reached the end of search results.",
+      });
+      hideLoadMoreButton();
+    } else {
       showLoadMoreButton();
     }
   } catch {
@@ -74,6 +83,7 @@ formEl.addEventListener('submit', async event => {
 loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   showLoader();
+  hideLoadMoreButton(); // Приховуємо кнопку на час fetch
 
   try {
     const data = await getImagesByQuery(query, page);
@@ -81,14 +91,17 @@ loadMoreBtn.addEventListener('click', async () => {
     createGallery(data.hits);
 
     const totalPages = Math.ceil(data.totalHits / perPage);
+
     if (page >= totalPages) {
       hideLoadMoreButton();
       iziToast.show({
         position: 'topRight',
         color: 'blue',
         title: 'Info',
-        message: "We're sorry, but you've reached the end of search results.",
+        message: "You've reached the end of search results.",
       });
+    } else {
+      showLoadMoreButton(); // Якщо ще є сторінки
     }
 
     // Прокрутка
